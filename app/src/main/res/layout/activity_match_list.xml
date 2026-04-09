@@ -10,7 +10,6 @@
     android:padding="16dp">
 
     <!-- Could use back gesture, but for better navigation UX I'll add a Back button -->
-    <!-- TODO: fix icon not showing up -->
     <ImageButton
         android:layout_width="48dp"
         android:layout_height="48dp"
