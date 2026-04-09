@@ -34,7 +34,6 @@
         app:layout_constraintBottom_toBottomOf="@id/buttonBack"/>
 
     <!-- RecyclerView to host the list of games played, order from most recent to least recent -->
-    <!-- TODO: figure out if item_game must be declared here for display or can be handled in the Adapter-->
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="0dp"
