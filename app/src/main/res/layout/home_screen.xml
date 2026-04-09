@@ -7,13 +7,61 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- GridLayout: this is needed for the 3x2 buttons matrix -->
+    <GridLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/buttonsGrid"
+        android:columnCount="3"
+        android:rowCount="2"
+        android:layout_margin="12dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- The buttons in order: R,G,B,M,Y,C -->
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonRed"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#e85a41"
+            android:text="R"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonGreen"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#47d93f"
+            android:text="G"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonBlue"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#3b5fd4"
+            android:text="B"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonMagenta"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#d43bd4"
+            android:text="M"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonYellow"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#f2d933"
+            android:text="Y"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonCyan"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#3ec1ed"
+            android:text="C"/>
+    </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
