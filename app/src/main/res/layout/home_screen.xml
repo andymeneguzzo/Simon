@@ -20,48 +20,84 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <!-- The buttons in order: R,G,B,M,Y,C -->
-        <Button
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:id="@+id/buttonRed"
             android:layout_columnWeight="1"
-            android:backgroundTint="#e85a41"
-            android:text="R"/>
-        <Button
+            android:text="R"
+            android:textColor="#fcf3eb"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="8dp"
+            android:background="#e85a41"/>
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:id="@+id/buttonGreen"
             android:layout_columnWeight="1"
-            android:backgroundTint="#47d93f"
-            android:text="G"/>
-        <Button
+            android:text="G"
+            android:textColor="#fcf3eb"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="8dp"
+            android:background="#47d93f"/>
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:id="@+id/buttonBlue"
             android:layout_columnWeight="1"
-            android:backgroundTint="#3b5fd4"
-            android:text="B"/>
-        <Button
+            android:text="B"
+            android:textColor="#fcf3eb"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="8dp"
+            android:background="#3b5fd4"/>
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:id="@+id/buttonMagenta"
             android:layout_columnWeight="1"
-            android:backgroundTint="#d43bd4"
-            android:text="M"/>
-        <Button
+            android:text="M"
+            android:textColor="#fcf3eb"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="8dp"
+            android:background="#d43bd4"/>
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:id="@+id/buttonYellow"
             android:layout_columnWeight="1"
-            android:backgroundTint="#f2d933"
-            android:text="Y"/>
-        <Button
+            android:text="Y"
+            android:textColor="#fcf3eb"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="8dp"
+            android:background="#f2d933"/>
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:id="@+id/buttonCyan"
             android:layout_columnWeight="1"
-            android:backgroundTint="#3ec1ed"
-            android:text="C"/>
+            android:text="C"
+            android:textColor="#fcf3eb"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="8dp"
+            android:background="#3ec1ed"/>
     </GridLayout>
 
     <!-- Non-editable TextView to view the pressed sequence -->
