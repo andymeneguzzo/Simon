@@ -158,7 +158,5 @@
                 android:layout_marginStart="8dp"
                 android:text="Fine partita" />
         </LinearLayout>
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
