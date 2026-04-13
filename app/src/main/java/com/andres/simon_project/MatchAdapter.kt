@@ -1,5 +1,6 @@
 package com.andres.simon_project
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -8,25 +9,38 @@ import androidx.recyclerview.widget.RecyclerView
 /* This is useful and essential to handle item_game element which represents
 * how the game will be shown in the MatchListActivity, and the RecyclerView that will
 * contain the list of played games, so then the item_game can be inflated in the RecyclerView */
-class MatchAdapter(private val items: List<GameSession.Match>) : RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
+class MatchAdapter(private val matchItems: List<GameSession.Match>) : RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
 
+    /* when ViewHolder created, inflate the item_game in the RecyclerView */
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): MatchViewHolder {
-        TODO("Not yet implemented")
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_game, parent, false)
+        return MatchViewHolder(view)
     }
 
+    /* When binding the ViewHolder, get the info from the matchItem of the list of matches, convert to String
+    * and bind it to the TextViews of the item_game */
     override fun onBindViewHolder(
         holder: MatchViewHolder,
         position: Int
     ) {
-        TODO("Not yet implemented")
+        val matchItem = matchItems[position]
+
+        holder.textViewPressCount.text = matchItem.pressCount.toString()
+
+        /* using an inline if-else */
+        holder.textViewSequence.text = if (matchItem.sequence.isEmpty()) {
+            "Sequenza vuota"
+        } else {
+            /* if not empty, print the sequence of colors separated by comma */
+            matchItem.sequence.joinToString(", ")
+        }
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    /* only returns the size of matchItems list, so how matches were played in the game session */
+    override fun getItemCount(): Int = matchItems.size
 
     /* This ViewHolder class holds and binds the elements in item_game */
     class MatchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
