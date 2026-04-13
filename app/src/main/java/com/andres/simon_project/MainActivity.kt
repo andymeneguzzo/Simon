@@ -54,7 +54,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bindUIViews() {
-        TODO("bind variables with their UI elements")
+        /* TextView for sequence */
+        textViewSequence = findViewById(R.id.textViewSequence)
+
+        /* Colored clickable TextViews */
+        buttonRed = findViewById(R.id.buttonRed)
+        buttonGreen = findViewById(R.id.buttonGreen)
+        buttonBlue = findViewById(R.id.buttonBlue)
+        buttonMagenta = findViewById(R.id.buttonMagenta)
+        buttonYellow = findViewById(R.id.buttonYellow)
+        buttonCyan = findViewById(R.id.buttonCyan)
+
+        /* Buttons */
+        buttonCancel = findViewById(R.id.buttonCancel)
+        buttonEndOfGame = findViewById(R.id.buttonEndOfGame)
     }
 
     private fun handleInstanceState(savedInstanceState: Bundle?) {
