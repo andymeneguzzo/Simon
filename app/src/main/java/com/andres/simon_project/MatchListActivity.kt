@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 /* In this Activity the user can visualize the list of matches played in order starting from most recent matches.
@@ -42,9 +43,27 @@ class MatchListActivity : AppCompatActivity() {
         setupInteractionListeners()
     }
 
-    private fun bindUIViews() {}
 
-    private fun setupRecyclerViewMatches() {}
+    private fun bindUIViews() {
+        buttonBack = findViewById(R.id.buttonBack)
+        dynamicListGames = findViewById(R.id.dynamicListGames)
+    }
 
-    private fun setupInteractionListeners() {}
+    private fun setupRecyclerViewMatches() {
+        /* create a MatchAdapter for match history */
+        matchAdapter = MatchAdapter(GameSession.matchHistory)
+
+        /* the RecyclerView shows the matches elements as a vertical list, so I use the LayoutManager */
+        dynamicListGames.layoutManager = LinearLayoutManager(this)
+        dynamicListGames.adapter = matchAdapter
+    }
+
+    private fun setupInteractionListeners() {
+        buttonBack.setOnClickListener {
+            /* ensure the sequence is cleared so user can play a new one */
+            GameSession.clearCurrentSequence()
+
+            finish()
+        }
+    }
 }

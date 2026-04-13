@@ -62,6 +62,12 @@ class MainActivity : AppCompatActivity() {
         printCurrentSequence()
     }
 
+    /* called for example when the user from MatchListActivity pressed the back button and navigates back Home Screen */
+    override fun onResume() {
+        super.onResume()
+        printCurrentSequence()
+    }
+
     /* Overridden method for Instance State saving */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
