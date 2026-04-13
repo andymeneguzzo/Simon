@@ -1,5 +1,6 @@
 package com.andres.simon_project
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -88,7 +89,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setInteractionListeners() {
-        TODO("Set all listeners for clickable TextViews and Buttons")
+        /* For colored TextViews, when clicked the onColorPressed method is called
+        * to handle the click of the specific color  */
+        buttonRed.setOnClickListener { onColorClicked("R") }
+        buttonGreen.setOnClickListener { onColorClicked("G") }
+        buttonBlue.setOnClickListener { onColorClicked("B") }
+        buttonMagenta.setOnClickListener { onColorClicked("M") }
+        buttonYellow.setOnClickListener { onColorClicked("Y") }
+        buttonCyan.setOnClickListener { onColorClicked("C") }
+
+        /* Buttons instead call only setOnClickListener */
+        buttonCancel.setOnClickListener {
+            /* When Cancella is pressed, the TextView for sequence is cleared and
+            removed from memory */
+            TODO("Handle in the session how game sequence is cleared from view and memory")
+            printCurrentSequence()
+        }
+
+        buttonEndOfGame.setOnClickListener {
+            TODO("Handle in session how game is ended")
+            printCurrentSequence()
+
+            /* Start an intent to navigate to the MatchListActivity */
+            val intent = Intent(this, MatchListActivity::class.java)
+            startActivity(intent)
+        }
+    }
+    private fun onColorClicked(colorName: String) {
+        TODO("handle in session how color is processed and appended to game sequence")
+        printCurrentSequence()
     }
 
     private fun printCurrentSequence() {
