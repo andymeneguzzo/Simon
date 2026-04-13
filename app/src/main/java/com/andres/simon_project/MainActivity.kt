@@ -62,12 +62,12 @@ class MainActivity : AppCompatActivity() {
         printCurrentSequence()
     }
 
-    /* Overridden method for Instance State handling */
+    /* Overridden method for Instance State saving */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        /* TODO: get sequence from the game session */
-        outState.putStringArrayList(ID_CURRENT_SEQUENCE, ArrayList(/* TODO */))
+        /* put the current sequence */
+        outState.putStringArrayList(ID_CURRENT_SEQUENCE, ArrayList(GameSession.currentSequence))
     }
 
     private fun bindUIViews() {
@@ -93,7 +93,12 @@ class MainActivity : AppCompatActivity() {
 
         /* if the sequence actually exists and is not NULL */
         if (handledSequence != null) {
-            TODO("Handle in the session how the sequence is kept or restored")
+            /* not calling the clearCurrentSequence() directly, because I want the class level currentSequence access
+            * when dealing with instance state change */
+            GameSession.currentSequence.clear()
+
+            /* rewrite them in the sequence  */
+            GameSession.currentSequence.addAll(handledSequence)
         }
     }
 
@@ -111,28 +116,32 @@ class MainActivity : AppCompatActivity() {
         buttonCancel.setOnClickListener {
             /* When Cancella is pressed, the TextView for sequence is cleared and
             removed from memory */
-            TODO("Handle in the session how game sequence is cleared from view and memory")
+            GameSession.clearCurrentSequence() // now calling the clearCurrentSequence() method directly
             printCurrentSequence()
         }
 
         buttonEndOfGame.setOnClickListener {
-            TODO("Handle in session how game is ended")
+            GameSession.endCurrentGame()
             printCurrentSequence()
 
             /* Start an intent to navigate to the MatchListActivity */
             val intent = Intent(this, MatchListActivity::class.java)
-            startActivity(intent)
+            startActivity(intent) // navigates to the MatchListActivity
         }
     }
     private fun onColorClicked(colorName: String) {
-        TODO("handle in session how color is processed and appended to game sequence")
+        GameSession.appendColor(colorName) // add color to the sequence
         printCurrentSequence()
     }
 
     private fun printCurrentSequence() {
-        /* TODO: handle in game session the retrieval of sequence to print */
-        val sequence = "Sequenza: ...";
+        var sequence = "Sequenza:"
+        if (!GameSession.currentSequence.isEmpty()) {
+            sequence = "Sequenza: ${GameSession.currentSequence.joinToString(", ")}"
+        }
 
+        /* if not empty, will visualize the sequence of colors separated by comma, otherwise the
+        * initialize "Sequenza:" empty sequence will be printed */
         textViewSequence.text = sequence
     }
 }
