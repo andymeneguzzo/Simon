@@ -27,6 +27,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonCancel: Button
     private lateinit var buttonEndOfGame: Button
 
+    /* Declare a companion object to identify the current sequence,
+    useful for InstanceState preservation since it can be called at class level
+    instead of instance level */
+    companion object {
+        private const val ID_CURRENT_SEQUENCE = "id_current_sequence"
+    }
+
     /* onCreate method being called at app launch */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +78,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleInstanceState(savedInstanceState: Bundle?) {
-        TODO("handle Instance State preservation")
+        /* get the current sequence associated to the ID_CURRENT_SEQUENCE companion object */
+        val handledSequence = savedInstanceState?.getStringArrayList(ID_CURRENT_SEQUENCE)
+
+        /* if the sequence actually exists and is not NULL */
+        if (handledSequence != null) {
+            TODO("Handle in the session how the sequence is kept or restored")
+        }
     }
 
     private fun setInteractionListeners() {
