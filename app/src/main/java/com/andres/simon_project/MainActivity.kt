@@ -121,8 +121,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonEndOfGame.setOnClickListener {
+            /* When Fine partita is pressed, TextView of sequence is cleared, sequence is saved and intent to MatchListActivity
+            * is started */
             GameSession.endCurrentGame()
-            printCurrentSequence()
+            printCurrentSequence() // TODO: consider maybe removing it since the sequence is actually going to be cleared
 
             /* Start an intent to navigate to the MatchListActivity */
             val intent = Intent(this, MatchListActivity::class.java)
