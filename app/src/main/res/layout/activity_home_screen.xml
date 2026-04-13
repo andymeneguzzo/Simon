@@ -101,7 +101,7 @@
             android:background="#3ec1ed"/>
     </GridLayout>
 
-    <!-- Non-editable TextView to view the pressed sequence -->
+    <!-- Non-editable TextView to view the pressed sequence - already multiline by default -->
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Sequenza:"
         android:textSize="16sp"
-        android:minHeight="50dp"
+        android:minHeight="80dp"
         android:background="#e6e8e8"/>
 
     <!-- Placing the two buttons next to each other wrapping them in a LinearLayout with horizontal orientation -->
