@@ -2,6 +2,7 @@ package com.andres.simon_project
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -59,6 +60,14 @@ class MainActivity : AppCompatActivity() {
 
         /* Keep sequence updated after every click of the colored TextViews */
         printCurrentSequence()
+    }
+
+    /* Overridden method for Instance State handling */
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        /* TODO: get sequence from the game session */
+        outState.putStringArrayList(ID_CURRENT_SEQUENCE, ArrayList(/* TODO */))
     }
 
     private fun bindUIViews() {
@@ -121,7 +130,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun printCurrentSequence() {
-        TODO("Enable sequence update after every click of the colored TextViews")
-    }
+        /* TODO: handle in game session the retrieval of sequence to print */
+        val sequence = "Sequenza: ...";
 
+        textViewSequence.text = sequence
+    }
 }
