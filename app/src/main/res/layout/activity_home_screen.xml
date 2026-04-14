@@ -111,7 +111,7 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonsGrid"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Sequenza:"
+        android:text="@string/sequence_label"
         android:textSize="16sp"
         android:minHeight="80dp"
         android:background="#e6e8e8"/>
@@ -134,7 +134,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:text="Cancella"/>
+            android:text="@string/cancel"/>
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:text="Fine partita"/>
+            android:text="@string/end_of_game"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

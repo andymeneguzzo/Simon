@@ -32,7 +32,8 @@ class MatchAdapter(private val matchItems: List<GameSession.Match>) : RecyclerVi
 
         /* using an inline if-else */
         holder.textViewSequence.text = if (matchItem.sequence.isEmpty()) {
-            "Sequenza vuota"
+            /* print the empty sequence, in italian or english based on system language */
+            holder.itemView.context.getString(R.string.empty_sequence)
         } else {
             /* if not empty, print the sequence of colors separated by comma */
             matchItem.sequence.joinToString(", ")

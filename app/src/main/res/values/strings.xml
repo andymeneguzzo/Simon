@@ -1,3 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- English strings -->
+
 <resources>
     <string name="app_name">Simon-project</string>
+
+    <string name="sequence_label">Sequence:</string>
+    <string name="cancel">Cancel</string>
+    <string name="end_of_game">End Game</string>
+    <string name="played_matches">Played matches</string>
+    <string name="back">Back</string>
+    <string name="empty_sequence">Empty sequence</string>
+
 </resources>

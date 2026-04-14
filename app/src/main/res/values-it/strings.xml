@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Italian strings -->
+
+<resources>
+    <string name="app_name">Simon-project</string>
+
+    <string name="sequence_label">Sequenza:</string>
+    <string name="cancel">Cancella</string>
+    <string name="end_of_game">Fine partita</string>
+    <string name="played_matches">Partite giocate</string>
+    <string name="back">Indietro</string>
+    <string name="empty_sequence">Sequenza vuota</string>
+</resources>

@@ -18,7 +18,7 @@
         android:layout_height="48dp"
         android:id="@+id/buttonBack"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Indietro"
+        android:contentDescription="@string/back"
         android:src="@drawable/backarrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textViewHistory"
         android:layout_margin="12dp"
-        android:text="Partite giocate"
+        android:text="@string/played_matches"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

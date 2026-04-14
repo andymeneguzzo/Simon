@@ -143,13 +143,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun printCurrentSequence() {
-        var sequence = "Sequenza:"
+        val sequenceLabel = getString(R.string.sequence_label)
+        var sequenceText = sequenceLabel
+
+        /* now that sequence_label is in strings for italian and english support
+        * the text shown in the TextView will adapt it's language based on system language */
         if (!GameSession.currentSequence.isEmpty()) {
-            sequence = "Sequenza: ${GameSession.currentSequence.joinToString(", ")}"
+            sequenceText = "$sequenceLabel: ${GameSession.currentSequence.joinToString(", ")}"
         }
 
         /* if not empty, will visualize the sequence of colors separated by comma, otherwise the
-        * initialize "Sequenza:" empty sequence will be printed */
-        textViewSequence.text = sequence
+        * empty sequence will be printed */
+        textViewSequence.text = sequenceText
     }
 }
