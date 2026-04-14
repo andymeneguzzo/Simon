@@ -33,7 +33,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="dynamicListGames"
+        app:layout_constraintEnd_toStartOf="@id/dynamicListGames"
         app:layout_constraintTop_toBottomOf="@id/buttonBack"/>
 
     <!-- RecyclerView to host the list of games played, order from most recent to least recent -->
