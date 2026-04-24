@@ -130,11 +130,13 @@ class MainActivity : AppCompatActivity() {
             /* When Fine partita is pressed, TextView of sequence is cleared, sequence is saved and intent to MatchListActivity
             * is started */
             GameSession.endCurrentGame()
-            printCurrentSequence() // TODO: consider maybe removing it since the sequence is actually going to be cleared
+            /* was printing the Current sequence before, not useful though since the button EndOfGame
+            * sends to the MatchListActivity */
+            // printCurrentSequence()
 
             /* Start an intent to navigate to the MatchListActivity */
             val intent = Intent(this, MatchListActivity::class.java)
-            startActivity(intent) // navigates to the MatchListActivity
+            startActivity(intent) // starts intent and navigates to the MatchListActivity
         }
     }
     private fun onColorClicked(colorName: String) {
