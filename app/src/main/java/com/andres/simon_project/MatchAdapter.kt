@@ -30,7 +30,7 @@ class MatchAdapter(private val matchItems: List<GameSession.Match>) : RecyclerVi
 
         holder.textViewPressCount.text = matchItem.pressCount.toString()
 
-        /* using an inline if-else */
+        /* using an inline if-else, more readable and straightforward */
         holder.textViewSequence.text = if (matchItem.sequence.isEmpty()) {
             /* print the empty sequence, in italian or english based on system language */
             holder.itemView.context.getString(R.string.empty_sequence)
@@ -40,10 +40,11 @@ class MatchAdapter(private val matchItems: List<GameSession.Match>) : RecyclerVi
         }
     }
 
-    /* only returns the size of matchItems list, so how matches were played in the game session */
+    /* only returns the size of matchItems list, so how many matches were played in the game session
+    * currently never used but must be overridden */
     override fun getItemCount(): Int = matchItems.size
 
-    /* This ViewHolder class holds and binds the elements in item_game */
+    /* This ViewHolder class holds and binds the elements of item_game */
     class MatchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewPressCount: TextView = itemView.findViewById(R.id.textViewPressCount)
         val textViewSequence: TextView = itemView.findViewById(R.id.textViewSequence)

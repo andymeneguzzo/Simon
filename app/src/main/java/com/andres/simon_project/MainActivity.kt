@@ -145,6 +145,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun printCurrentSequence() {
+        // now that sequenceLabel is in strings for multilingual support, must retrieve it with getString(...)
         val sequenceLabel = getString(R.string.sequence_label)
         var sequenceText = sequenceLabel
 

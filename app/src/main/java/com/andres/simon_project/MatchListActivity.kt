@@ -36,10 +36,10 @@ class MatchListActivity : AppCompatActivity() {
         /* Bind the variables with their UI element */
         bindUIViews()
 
-        /* setup the RecyclerView for the dynamic list of matches */
+        /* set up the RecyclerView for the dynamic list of matches */
         setupRecyclerViewMatches()
 
-        /* setup the interaction listeners */
+        /* set up the interaction listeners */
         setupInteractionListeners()
     }
 
@@ -63,6 +63,7 @@ class MatchListActivity : AppCompatActivity() {
             /* ensure the sequence is cleared so user can play a new one */
             GameSession.clearCurrentSequence()
 
+            // activity is done and should be closed
             finish()
         }
     }

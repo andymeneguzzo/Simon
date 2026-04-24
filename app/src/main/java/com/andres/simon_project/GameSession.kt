@@ -6,7 +6,8 @@ package com.andres.simon_project
 * - methods to clear the played sequence, append a color to the sequence, end the current game */
 object GameSession {
 
-    /* Match is a data class containing pressCount */
+    /* Match is represented as a Data class, a class mainly to contain data.
+    * Match in fact contains only the number of colored rectangles pressed */
     data class Match(val sequence: List<String>) {
         val pressCount : Int
             /* get method returns the size of the sequence */
@@ -20,7 +21,7 @@ object GameSession {
     /* history changes as well, so use MutableList */
     val matchHistory: MutableList<Match> = mutableListOf()
 
-    /* Note on MutableList<...>: this data structure allows to create a generic ordered collection of elements
+    /* Note on why I chose MutableList<...>: this data structure allows to create a generic ordered collection of elements
     * and I can simply add or remove elements from it with add(...) and clear(...) */
 
     /* Clear the sequence of colors */
