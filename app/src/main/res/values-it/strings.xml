@@ -10,6 +10,7 @@
     <string name="pause_game">Pausa</string>
     <string name="end_of_game">Fine</string>
     <string name="played_matches">Partite giocate</string>
+    <string name="match_detail">Dettaglio partita</string>
     <string name="back">Indietro</string>
     <string name="empty_sequence">Sequenza vuota</string>
 </resources>
