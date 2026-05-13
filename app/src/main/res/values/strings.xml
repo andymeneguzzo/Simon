@@ -5,6 +5,7 @@
     <string name="app_name">Simon-project</string>
 
     <string name="sequence_label">Sequence:</string>
+    <string name="new_game">New game</string>
     <string name="start_game">Start</string>
     <string name="pause_game">Pause</string>
     <string name="end_of_game">End</string>
