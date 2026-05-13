@@ -130,11 +130,19 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonCancel"
+            android:id="@+id/buttonStartGame"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:text="@string/cancel"/>
+            android:text="@string/start_game"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonPauseGame"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:text="@string/pause_game"/>
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"

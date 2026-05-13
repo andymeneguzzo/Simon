@@ -143,12 +143,12 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonCancel"
+                android:id="@+id/buttonStartGame"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:text="@string/cancel" />
+                android:text="@string/start_game" />
 
             <Button
                 android:id="@+id/buttonEndOfGame"
