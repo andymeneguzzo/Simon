@@ -91,7 +91,25 @@ object GameSession {
         matchYetToBeSaved = null // no match to save
     }
     /* called when configuration changes or the Activity is recreated */
-    fun restoreGameState() {/* TODO */}
+    fun restoreGameState(
+        computerSequence: List<String>,
+        currentSequence: List<String>,
+        gameState: GameState,
+        computerPresentationIndex: Int,
+        maxCorrectLength: Int,
+        matchYetToBeSaved: Match?
+    ) {
+        GameSession.computerSequence.clear()
+        GameSession.computerSequence.addAll(computerSequence)
+
+        GameSession.currentSequence.clear()
+        GameSession.currentSequence.addAll(currentSequence)
+
+        GameSession.gameState = gameState
+        GameSession.computerPresentationIndex = computerPresentationIndex
+        GameSession.maxCorrectLength = maxCorrectLength
+        GameSession.matchYetToBeSaved = matchYetToBeSaved
+    }
     /* used by computer to append a random color to the sequence */
     fun generateRandomColor() {
         val randomIndex = Random.nextInt(availableColors.size)
