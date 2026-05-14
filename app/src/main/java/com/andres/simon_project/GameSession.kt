@@ -32,15 +32,31 @@ object GameSession {
             get() = sequence.size
     }
 
+    /* These are the colors the computer can choose from when giving out the sequence */
+    private val availableColors = listOf("R", "G", "B", "M", "Y", "C")
+
+    /* Sequence created by computer */
+    val computerSequence: MutableList<String> = mutableListOf()
+
     /* currentSequence changes when user presses new colored TextViews, therefore
     * use a MutableList */
+    /* this is the sequence pressed by the player during his turn */
     val currentSequence: MutableList<String> = mutableListOf()
 
-    /* history changes as well, so use MutableList */
+    /* history changes as well, so use MutableList -> this will be loaded from SQLite db */
     val matchHistory: MutableList<Match> = mutableListOf()
 
     /* Note on why I chose MutableList<...>: this data structure allows to create a generic ordered collection of elements
     * and I can simply add or remove elements from it with add(...) and clear(...) */
+
+    /* current game state */
+    var gameState: GameState = GameState.IDLE // starts in IDLE always
+
+    /* keep track of the index during the computer presentation of the sequence */
+    var computerPresentationIndex: Int = 0
+
+    /* max length of the correctly reproduced sequence */
+    var maxCorrectLength: Int = 0
 
     /* Clear the sequence of colors */
     fun clearCurrentSequence() {
