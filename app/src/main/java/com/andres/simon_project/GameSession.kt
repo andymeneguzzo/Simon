@@ -146,6 +146,25 @@ object GameSession {
 
         gameState = GameState.GAME_OVER
     }
+    /* called when the user the endOfGame button or uses the system Back while the game is still running */
+    fun finishGameAfterInterrupt() {
+        if (computerSequence.isEmpty()) {
+            // nothing really happens
+            clearGameState()
+            return
+        }
+
+        // get the position in which we stopped
+        val interruptIndex = when (gameState) {
+            GameState.PLAYER_TURN -> currentSequence.size
+            GameState.COMPUTER_TURN -> computerPresentationIndex
+            GameState.PAUSED -> computerPresentationIndex // when paused during computer generation
+            else -> 0 // nothing happened yet
+        }.coerceIn(0, computerSequence.lastIndex) // keep it between 0 and the computerSequence last index
+
+        // end the game passing the index of interrupt
+        finishGameAfterError(interruptIndex)
+    }
 
 
 
