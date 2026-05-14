@@ -18,7 +18,7 @@ object GameSession {
     }
 
     /* Model the result of the player clicking a color as a state as well */
-    enum class PlayerClickResult {
+    enum class PlayerPressResult {
         IGNORED, // player is not allowed yet to click
         PARTIALLY_CORRECT, // it is partly correct
         ROUND_COMPLETED, // round is over and correct
@@ -60,6 +60,10 @@ object GameSession {
     /* max length of the correctly reproduced sequence */
     var maxCorrectLength: Int = 0
 
+    /* as a case, I consider the possibility of a game finished but not yet saved
+    * so add a variable to check if the game is still waiting to be saved */
+    var matchYetToBeSaved: Match? = null
+
 
     /* When starting a new game, everything is set to default or initial value */
     fun startNewGame() {
@@ -82,6 +86,43 @@ object GameSession {
         val randomIndex = Random.nextInt(availableColors.size)
         computerSequence.add(availableColors[randomIndex])
     }
+
+
+    /* after computer turn, method is called when it's player turn */
+    fun startPlayerTurn() {
+        currentSequence.clear() // to make sure my sequence is cleared
+        computerPresentationIndex = 0 // now it's my turn
+        gameState = GameState.PLAYER_TURN
+    }
+    /* handle the color pressed by the player */
+    fun handlePlayerColorPressed(color: String) : PlayerPressResult {
+        if (gameState != GameState.PLAYER_TURN) return PlayerPressResult.IGNORED // player not allowed to input a color
+
+        val pressedIndex = currentSequence.size // my position in sequence of what I pressed
+        val expectedColor = computerSequence.getOrNull(pressedIndex) // the color in computer sequence at the same position
+        currentSequence.add(color)
+
+        if (expectedColor != color) {
+            /* TODO: can handle it better */
+            return PlayerPressResult.WRONG
+        }
+
+        if (currentSequence.size == computerSequence.size) {
+            // means the two sequences are same length, so the round is over
+            maxCorrectLength = computerSequence.size
+            currentSequence.clear()
+            generateRandomColor() // now it's going to be computer turn
+
+            gameState = GameState.COMPUTER_TURN
+            computerPresentationIndex = 0
+
+            return PlayerPressResult.ROUND_COMPLETED
+        }
+
+        // if not wrong, then
+        return PlayerPressResult.PARTIALLY_CORRECT // because round still going
+    }
+
 
 
 
