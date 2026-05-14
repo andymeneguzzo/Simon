@@ -88,6 +88,7 @@ object GameSession {
         gameState = GameState.IDLE // back to IDLE, then set to COMPUTER_TURN when the game started
         computerPresentationIndex = 0
         maxCorrectLength = 0
+        matchYetToBeSaved = null // no match to save
     }
     /* used by computer to append a random color to the sequence */
     fun generateRandomColor() {
@@ -164,6 +165,14 @@ object GameSession {
 
         // end the game passing the index of interrupt
         finishGameAfterError(interruptIndex)
+    }
+
+    /* As requested, when the user stops the computer proposal at length 1, the game is just discarded, no saved and the match is not saved */
+    fun isComputerPresentationDiscardable() : Boolean {
+        return computerSequence.size == 1 && // computer presented a length 1 sequence
+                maxCorrectLength == 0 && // user got nothing right
+                currentSequence.isEmpty() && // user inserted nothing
+                (gameState == GameState.COMPUTER_TURN || gameState == GameState.PAUSED) // game was paused or it was computer's turn
     }
 
 
