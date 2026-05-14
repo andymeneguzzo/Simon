@@ -90,6 +90,8 @@ object GameSession {
         maxCorrectLength = 0
         matchYetToBeSaved = null // no match to save
     }
+    /* called when configuration changes or the Activity is recreated */
+    fun restoreGameState() {/* TODO */}
     /* used by computer to append a random color to the sequence */
     fun generateRandomColor() {
         val randomIndex = Random.nextInt(availableColors.size)
@@ -167,12 +169,25 @@ object GameSession {
         finishGameAfterError(interruptIndex)
     }
 
+    /* if a match is yet to be saved, then at a certain point it should be consumed
+     call this method when the pending match needs to be consumed for saving, and then clear the game state */
+    fun consumeMatchYetToBeSaved() : Match? {
+        val matchToBeSaved = matchYetToBeSaved
+        clearGameState()
+        return matchToBeSaved // so can be passed to SQLite db for saving
+    }
     /* As requested, when the user stops the computer proposal at length 1, the game is just discarded, no saved and the match is not saved */
     fun isComputerPresentationDiscardable() : Boolean {
         return computerSequence.size == 1 && // computer presented a length 1 sequence
                 maxCorrectLength == 0 && // user got nothing right
                 currentSequence.isEmpty() && // user inserted nothing
                 (gameState == GameState.COMPUTER_TURN || gameState == GameState.PAUSED) // game was paused or it was computer's turn
+    }
+
+
+    fun putMatchHistory(matches: List<Match>) {
+        matchHistory.clear()
+        matchHistory.addAll(matches)
     }
 
 
