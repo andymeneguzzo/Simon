@@ -61,7 +61,7 @@ object GameSession {
     var maxCorrectLength: Int = 0
 
     /* as a case, I consider the possibility of a game finished but not yet saved
-    * so add a variable to check if the game is still waiting to be saved */
+    * so add a Match object with the game info still waiting to be saved */
     var matchYetToBeSaved: Match? = null
 
 
@@ -121,6 +121,20 @@ object GameSession {
 
         // if not wrong, then
         return PlayerPressResult.PARTIALLY_CORRECT // because round still going
+    }
+    fun finishGameAfterError(errorPosition: Int) {
+        if (computerSequence.isEmpty()) {
+            // no computer sequence, then just clear the state and end method call
+            clearGameState()
+            return
+        }
+
+        val safeErrorPosition = errorPosition.coerceIn(0, computerSequence.lastIndex) // can use .lastIndex since computerSequence is a MutableList
+        matchYetToBeSaved = Match(
+            /* TODO: consider changing Match object to include further info */
+        )
+
+        gameState = GameState.GAME_OVER
     }
 
 
