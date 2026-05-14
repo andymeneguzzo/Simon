@@ -58,6 +58,16 @@ object GameSession {
     /* max length of the correctly reproduced sequence */
     var maxCorrectLength: Int = 0
 
+
+    /* When starting a new game, everything is set to default or initial value */
+    fun startNewGame() {
+        gameState = GameState.COMPUTER_TURN // starts with computer showing the sequence
+        computerPresentationIndex = 0
+        maxCorrectLength = 0
+    }
+
+
+
     /* Clear the sequence of colors */
     fun clearCurrentSequence() {
         /* currentSequence is a MutableList, so it's sufficient to call clear() method */
