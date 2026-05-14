@@ -1,5 +1,7 @@
 package com.andres.simon_project
 
+import kotlin.random.Random
+
 /* object GameSession represents the information about a specific game session, specifically:
 * - currentSequence: the sequence being played
 * - matchHistory: the list of Match objects
@@ -61,9 +63,24 @@ object GameSession {
 
     /* When starting a new game, everything is set to default or initial value */
     fun startNewGame() {
+        clearGameState()
+
+        generateRandomColor()
+
         gameState = GameState.COMPUTER_TURN // starts with computer showing the sequence
+    }
+    /* clears variables for a new game start */
+    fun clearGameState() {
+        computerSequence.clear()
+        currentSequence.clear()
+        gameState = GameState.IDLE // back to IDLE, then set to COMPUTER_TURN when the game started
         computerPresentationIndex = 0
         maxCorrectLength = 0
+    }
+    /* used by computer to append a random color to the sequence */
+    fun generateRandomColor() {
+        val randomIndex = Random.nextInt(availableColors.size)
+        computerSequence.add(availableColors[randomIndex])
     }
 
 
