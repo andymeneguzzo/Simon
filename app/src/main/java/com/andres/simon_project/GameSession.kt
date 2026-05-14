@@ -6,8 +6,26 @@ package com.andres.simon_project
 * - methods to clear the played sequence, append a color to the sequence, end the current game */
 object GameSession {
 
-    /* Match is represented as a Data class, a class mainly to contain data.
+    /* Game states, so I can link logic to a state of the GameSession */
+    enum class GameState {
+        IDLE, // nothing's happening
+        COMPUTER_TURN, // computer is showing sequence
+        PAUSED, // game paused
+        PLAYER_TURN, // player is inputting sequence
+        GAME_OVER // game is ended
+    }
+
+    /* Model the result of the player clicking a color as a state as well */
+    enum class PlayerClickResult {
+        IGNORED, // player is not allowed yet to click
+        PARTIALLY_CORRECT, // it is partly correct
+        ROUND_COMPLETED, // round is over and correct
+        WRONG // it's wrong
+    }
+
+    /* Match is a completed game, represented as a Data class, a class mainly to contain data.
     * Match in fact contains only the number of colored rectangles pressed */
+    /* TODO: see if something needs to change here */
     data class Match(val sequence: List<String>) {
         val pressCount : Int
             /* get method returns the size of the sequence */
