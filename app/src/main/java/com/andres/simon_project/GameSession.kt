@@ -27,12 +27,20 @@ object GameSession {
 
     /* Match is a completed game, represented as a Data class, a class mainly to contain data.
     * Match in fact contains only the number of colored rectangles pressed */
-    /* TODO: see if something needs to change here */
+    /**
     data class Match(val sequence: List<String>) {
         val pressCount : Int
             /* get method returns the size of the sequence */
             get() = sequence.size
     }
+    */
+    data class Match(
+        val id: Long = 0L, // as a good practice and will be useful for SQLite
+        val maxCorrectLength: Int, // as required, the max correct sequence length
+        val errorSequence: List<String>, // the sequence after the error
+        val errorIndex: Int,
+        val createdAt: Long = System.currentTimeMillis() // to make the "from most recent" ordering more robust, every match will have a createdAt timestamp
+    )
 
     /* These are the colors the computer can choose from when giving out the sequence */
     private val availableColors = listOf("R", "G", "B", "M", "Y", "C")
@@ -103,7 +111,7 @@ object GameSession {
         currentSequence.add(color)
 
         if (expectedColor != color) {
-            /* TODO: can handle it better */
+            finishGameAfterError(pressedIndex) // pass the index in which error occured
             return PlayerPressResult.WRONG
         }
 
@@ -131,7 +139,9 @@ object GameSession {
 
         val safeErrorPosition = errorPosition.coerceIn(0, computerSequence.lastIndex) // can use .lastIndex since computerSequence is a MutableList
         matchYetToBeSaved = Match(
-            /* TODO: consider changing Match object to include further info */
+            maxCorrectLength = maxCorrectLength,
+            errorSequence = computerSequence.toList(),
+            errorIndex = safeErrorPosition
         )
 
         gameState = GameState.GAME_OVER
@@ -158,7 +168,7 @@ object GameSession {
         val finalSequence = currentSequence.toList()
 
         /* when game is ended, the sequence is added to matchHistory */
-        matchHistory.add(0, Match(finalSequence)) // add to top for "most recent" ordering
+        // matchHistory.add(0, Match(finalSequence)) // add to top for "most recent" ordering
         currentSequence.clear()
     }
 }
