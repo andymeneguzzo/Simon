@@ -196,25 +196,18 @@ class MainActivity : AppCompatActivity() {
         buttonYellow.setOnClickListener { onColorClicked("Y") }
         buttonCyan.setOnClickListener { onColorClicked("C") }
 
-        /* Buttons instead call only setOnClickListener */
+        /* Buttons */
         buttonStartGame.setOnClickListener {
-            /* When Cancella is pressed, the TextView for sequence is cleared and
-            removed from memory */
-            GameSession.clearCurrentSequence() // now calling the clearCurrentSequence() method directly
-            printCurrentSequence()
+            GameSession.startNewGame()
+            /* TODO: complete */
+        }
+
+        buttonPauseGame.setOnClickListener {
+            /* TODO: handle pause game */
         }
 
         buttonEndOfGame.setOnClickListener {
-            /* When Fine partita is pressed, TextView of sequence is cleared, sequence is saved and intent to MatchListActivity
-            * is started */
-            GameSession.endCurrentGame()
-            /* was printing the Current sequence before, not useful though since the button EndOfGame
-            * sends to the MatchListActivity */
-            // printCurrentSequence()
-
-            /* Start an intent to navigate to the MatchListActivity */
-            val intent = Intent(this, MatchListActivity::class.java)
-            startActivity(intent) // starts intent and navigates to the MatchListActivity
+            /* TODO: handle end of game */
         }
     }
     private fun onColorClicked(colorName: String) {
