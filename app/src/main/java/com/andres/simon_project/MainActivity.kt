@@ -250,7 +250,9 @@ class MainActivity : AppCompatActivity() {
 
             runOnUiThread {
                 if (GameSession.gameState == GameSession.GameState.COMPUTER_TURN) {
-                    // todo: handle when it's player turn
+                    GameSession.startPlayerTurn()
+                    printGameText()
+                    updateButtonState()
                 }
             }
         }
