@@ -215,6 +215,7 @@ class MainActivity : AppCompatActivity() {
         printCurrentSequence()
     }
 
+    /*
     private fun printCurrentSequence() {
         // now that sequenceLabel is in strings for multilingual support, must retrieve it with getString(...)
         val sequenceLabel = getString(R.string.sequence_label)
@@ -229,5 +230,35 @@ class MainActivity : AppCompatActivity() {
         /* if not empty, will visualize the sequence of colors separated by comma, otherwise the
         * empty sequence will be printed */
         textViewSequence.text = sequenceText
+    }
+    */
+
+    private fun printGameText() {
+        when (GameSession.gameState) {
+            GameSession.GameState.IDLE -> {
+                textViewSequence.text = "" // nothing to show, in IDLE mode
+            }
+
+            GameSession.GameState.COMPUTER_TURN, // here it's the computer presenting the sequence
+            GameSession.GameState.PAUSED -> {
+                textViewSequence.text = ""
+            }
+            GameSession.GameState.PLAYER_TURN -> {
+                val sequenceLabel = getString(R.string.sequence_label)
+                textViewSequence.text = if (GameSession.currentSequence.isEmpty()) {
+                    sequenceLabel
+                } else {
+                    "$sequenceLabel ${GameSession.currentSequence.joinToString(", ")}"
+                }
+            }
+
+            GameSession.GameState.GAME_OVER -> {
+                printErrorState()
+            }
+        }
+    }
+
+    private fun printErrorState() {
+        textViewSequence.text = getString(R.string.game_error)
     }
 }

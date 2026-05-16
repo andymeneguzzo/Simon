@@ -14,4 +14,6 @@
     <string name="back">Back</string>
     <string name="empty_sequence">Empty sequence</string>
 
+    <string name="game_error">Error, game over. Press back to save the match</string>
+
 </resources>

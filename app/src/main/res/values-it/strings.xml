@@ -13,4 +13,6 @@
     <string name="match_detail">Dettaglio partita</string>
     <string name="back">Indietro</string>
     <string name="empty_sequence">Sequenza vuota</string>
+
+    <string name="game_error">Errore, game over. Premere Back per salvare la partita</string>
 </resources>
