@@ -40,6 +40,9 @@ class MainActivity : AppCompatActivity() {
     private val gameScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private var presentationJob: Job? = null
 
+    /* Database */
+    private lateinit var dbHelper: MatchDBHelper
+
     /* Declare a companion object to identify the current sequence,
     useful for InstanceState preservation since it can be called at class level
     instead of instance level */
@@ -61,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         /* TODO: Will instantiate database or database Helper */
+        dbHelper = MatchDBHelper(this)
 
         /* Bind variables with their UI elements (found by ID) */
         bindUIViews()
