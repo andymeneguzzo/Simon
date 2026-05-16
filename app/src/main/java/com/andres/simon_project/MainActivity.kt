@@ -13,6 +13,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -85,12 +87,13 @@ class MainActivity : AppCompatActivity() {
         /* Set interaction listeners for clickable colored TextViews and Buttons  */
         setInteractionListeners()
 
+        // game state and button state
         printGameText()
-
-        /* TODO will have to deal with update of button state */
+        updateButtonState()
 
         if (GameSession.gameState == GameSession.GameState.COMPUTER_TURN) {
             /* TODO : start the computer presentation */
+            beginComputerPresentation()
         }
     }
 
@@ -212,6 +215,45 @@ class MainActivity : AppCompatActivity() {
     private fun onColorClicked(colorName: String) {
         GameSession.appendColor(colorName) // add color to the sequence
         printCurrentSequence()
+    }
+
+    private fun beginComputerPresentation() {
+        if (presentationJob?.isActive == true) return
+
+        // launch a job
+        presentationJob = gameScope.launch {
+            delay(300) // a bit of delay for stability
+
+            while (GameSession.computerPresentationIndex < GameSession.computerSequence.size) {
+                while (GameSession.gameState == GameSession.GameState.PAUSED) {
+                    delay(100) // wait until unpaused
+                }
+                if (GameSession.gameState != GameSession.GameState.COMPUTER_TURN) {
+                    return@launch // after wait, check if still computer turn, otherwise stop the coroutine
+                }
+
+                val colorName = GameSession.computerSequence[GameSession.computerPresentationIndex]
+
+                runOnUiThread {
+                    textViewSequence.text = ""
+                    // TODO might give some color feedback
+                }
+                delay(430)
+
+                runOnUiThread {
+                    // todo: then deactivate the feedback
+                }
+
+                GameSession.computerPresentationIndex++
+                delay(200)
+            }
+
+            runOnUiThread {
+                if (GameSession.gameState == GameSession.GameState.COMPUTER_TURN) {
+                    // todo: handle when it's player turn
+                }
+            }
+        }
     }
 
     /*
