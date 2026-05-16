@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 
 class MainActivity : AppCompatActivity() {
 
@@ -73,7 +74,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        /* TODO: Will instantiate database or database Helper */
         dbHelper = MatchDBHelper(this)
 
         /* Bind variables with their UI elements (found by ID) */
@@ -87,12 +87,25 @@ class MainActivity : AppCompatActivity() {
 
         /* Keep sequence updated after every click of the colored TextViews */
         printCurrentSequence()
+
+        /* will have to deal with game text being rendered and update of button state */
+
+        if (GameSession.gameState == GameSession.GameState.COMPUTER_TURN) {
+            /* start the computer presentation */
+        }
     }
 
     /* called for example when the user from MatchListActivity pressed the back button and navigates back Home Screen */
     override fun onResume() {
         super.onResume()
         printCurrentSequence()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // coroutine and job canceled
+        presentationJob?.cancel()
+        gameScope.cancel()
     }
 
     /* Overridden method for Instance State saving */
@@ -119,6 +132,7 @@ class MainActivity : AppCompatActivity() {
 
         /* Buttons */
         buttonStartGame = findViewById(R.id.buttonStartGame)
+        buttonPauseGame = findViewById(R.id.buttonPauseGame)
         buttonEndOfGame = findViewById(R.id.buttonEndOfGame)
     }
 
