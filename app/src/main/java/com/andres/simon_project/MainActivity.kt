@@ -85,10 +85,9 @@ class MainActivity : AppCompatActivity() {
         /* Set interaction listeners for clickable colored TextViews and Buttons  */
         setInteractionListeners()
 
-        /* Keep sequence updated after every click of the colored TextViews */
-        printCurrentSequence()
+        printGameText()
 
-        /* will have to deal with game text being rendered and update of button state */
+        /* TODO will have to deal with update of button state */
 
         if (GameSession.gameState == GameSession.GameState.COMPUTER_TURN) {
             /* TODO : start the computer presentation */
@@ -98,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     /* called for example when the user from MatchListActivity pressed the back button and navigates back Home Screen */
     override fun onResume() {
         super.onResume()
-        printCurrentSequence()
+        printGameText()
     }
 
     override fun onDestroy() {
@@ -257,8 +256,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun printErrorState() {
         textViewSequence.text = getString(R.string.game_error)
+    }
+    private fun updateButtonState() {
+        buttonStartGame.isEnabled = GameSession.gameState == GameSession.GameState.IDLE
+        buttonPauseGame.isEnabled = GameSession.gameState == GameSession.GameState.COMPUTER_TURN ||
+                GameSession.gameState == GameSession.GameState.PAUSED
+        buttonEndOfGame.isEnabled = GameSession.gameState == GameSession.GameState.COMPUTER_TURN ||
+                GameSession.gameState == GameSession.GameState.PAUSED ||
+                GameSession.gameState == GameSession.GameState.PLAYER_TURN
+
+        buttonPauseGame.text = if (GameSession.gameState == GameSession.GameState.PAUSED) {
+            getString(R.string.resume_game)
+        } else {
+            getString(R.string.pause_game)
+        }
     }
 }

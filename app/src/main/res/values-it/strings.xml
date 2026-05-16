@@ -7,6 +7,7 @@
     <string name="sequence_label">Sequenza:</string>
     <string name="new_game">Nuova partita</string>
     <string name="start_game">Inizia</string>
+    <string name="resume_game">Riprendi</string>
     <string name="pause_game">Pausa</string>
     <string name="end_of_game">Fine</string>
     <string name="played_matches">Partite giocate</string>
