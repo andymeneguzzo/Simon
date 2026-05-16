@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         /* will have to deal with game text being rendered and update of button state */
 
         if (GameSession.gameState == GameSession.GameState.COMPUTER_TURN) {
-            /* start the computer presentation */
+            /* TODO : start the computer presentation */
         }
     }
 
@@ -130,6 +130,44 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun handleInstanceState(savedInstanceState: Bundle?) {
+
+        if (savedInstanceState == null) return
+
+        /* get the current sequence associated to the ID_CURRENT_SEQUENCE companion object */
+        val handledCurrentSequence = savedInstanceState.getStringArrayList(ID_CURRENT_SEQUENCE) ?: arrayListOf()
+        val handledComputerSequence = savedInstanceState.getStringArrayList(ID_COMPUTER_SEQUENCE) ?: arrayListOf()
+        val handledGameStateName = savedInstanceState.getString(ID_GAME_STATE) ?: GameSession.GameState.IDLE.name
+        val handledGameState = GameSession.GameState.valueOf(handledGameStateName)
+        val handledComputerPresentationIndex = savedInstanceState.getInt(ID_COMPUTER_PRESENTATION_INDEX)
+        val handledMaxCorrectLength = savedInstanceState.getInt(ID_MAX_CORRECT_LENGTH)
+
+        // pending match data
+        val hasPendingMatch = savedInstanceState.getBoolean(ID_HAS_PENDING_MATCH)
+        val handledPendingMatch = if (hasPendingMatch) {
+            val pendingSequence = savedInstanceState.getStringArrayList(
+                ID_PENDING_MATCH_SEQUENCE
+            ) ?: arrayListOf()
+            GameSession.Match(
+                maxCorrectLength = savedInstanceState.getInt(ID_PENDING_MATCH_MAX_CORRECT),
+                errorSequence = pendingSequence,
+                errorIndex = savedInstanceState.getInt(ID_PENDING_MATCH_ERROR_INDEX),
+                createdAt = savedInstanceState.getLong(ID_PENDING_MATCH_CREATED_AT)
+            )
+        } else {
+            null
+        }
+
+        GameSession.restoreGameState(
+            computerSequence = handledComputerSequence,
+            currentSequence = handledCurrentSequence,
+            gameState = handledGameState,
+            computerPresentationIndex = handledComputerPresentationIndex,
+            maxCorrectLength = handledMaxCorrectLength,
+            matchYetToBeSaved = handledPendingMatch
+        )
+    }
+
     private fun bindUIViews() {
         /* TextView for sequence */
         textViewSequence = findViewById(R.id.textViewSequence)
@@ -146,21 +184,6 @@ class MainActivity : AppCompatActivity() {
         buttonStartGame = findViewById(R.id.buttonStartGame)
         buttonPauseGame = findViewById(R.id.buttonPauseGame)
         buttonEndOfGame = findViewById(R.id.buttonEndOfGame)
-    }
-
-    private fun handleInstanceState(savedInstanceState: Bundle?) {
-        /* get the current sequence associated to the ID_CURRENT_SEQUENCE companion object */
-        val handledSequence = savedInstanceState?.getStringArrayList(ID_CURRENT_SEQUENCE)
-
-        /* if the sequence actually exists and is not NULL */
-        if (handledSequence != null) {
-            /* not calling the clearCurrentSequence() directly, because I want the class level currentSequence access
-            * when dealing with instance state change */
-            GameSession.currentSequence.clear()
-
-            /* rewrite them in the sequence  */
-            GameSession.currentSequence.addAll(handledSequence)
-        }
     }
 
     private fun setInteractionListeners() {
