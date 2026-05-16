@@ -2,13 +2,16 @@ package com.andres.simon_project
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,8 +29,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonCyan: TextView
 
     /* Buttons */
-    private lateinit var buttonCancel: Button
+    private lateinit var buttonStartGame: Button
+    private lateinit var buttonPauseGame: Button
     private lateinit var buttonEndOfGame: Button
+
+    /* AudioTrack audio player */
+    private val audioPlayer = SimonAudioPlayer()
+
+    /* As suggested, use kotlin coroutine to handle computer sequence presentation */
+    private val gameScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+    private var presentationJob: Job? = null
 
     /* Declare a companion object to identify the current sequence,
     useful for InstanceState preservation since it can be called at class level
@@ -48,6 +59,8 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        /* TODO: Will instantiate database or database Helper */
 
         /* Bind variables with their UI elements (found by ID) */
         bindUIViews()
@@ -72,6 +85,8 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
+        /* TODO: will need to put states and data about the game */
+
         /* put the current sequence */
         outState.putStringArrayList(ID_CURRENT_SEQUENCE, ArrayList(GameSession.currentSequence))
     }
@@ -89,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         buttonCyan = findViewById(R.id.buttonCyan)
 
         /* Buttons */
-        buttonCancel = findViewById(R.id.buttonCancel)
+        buttonStartGame = findViewById(R.id.buttonStartGame)
         buttonEndOfGame = findViewById(R.id.buttonEndOfGame)
     }
 
@@ -119,7 +134,7 @@ class MainActivity : AppCompatActivity() {
         buttonCyan.setOnClickListener { onColorClicked("C") }
 
         /* Buttons instead call only setOnClickListener */
-        buttonCancel.setOnClickListener {
+        buttonStartGame.setOnClickListener {
             /* When Cancella is pressed, the TextView for sequence is cleared and
             removed from memory */
             GameSession.clearCurrentSequence() // now calling the clearCurrentSequence() method directly
