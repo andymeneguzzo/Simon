@@ -76,5 +76,9 @@ class SimonAudioPlayer {
     }
     fun playAudioForColor(color: String) {
         /* assign to each color its frequency and play its audio */
+        val freq = assignFrequencyToColor(color)
+        Thread {
+            playAudio(freq) // passed the frequency so the AudioTrack object is created for the specific color freq
+        }.start()
     }
 }
