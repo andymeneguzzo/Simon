@@ -112,10 +112,22 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        /* TODO: will need to put states and data about the game */
-
         /* put the current sequence */
         outState.putStringArrayList(ID_CURRENT_SEQUENCE, ArrayList(GameSession.currentSequence))
+        outState.putStringArrayList(ID_COMPUTER_SEQUENCE, ArrayList(GameSession.currentSequence))
+        outState.putString(ID_GAME_STATE, GameSession.gameState.name)
+        outState.putInt(ID_COMPUTER_PRESENTATION_INDEX, GameSession.computerPresentationIndex)
+        outState.putInt(ID_MAX_CORRECT_LENGTH, GameSession.maxCorrectLength)
+
+        // put the pending match if there exists one
+        val pendingMatch = GameSession.matchYetToBeSaved
+        outState.putBoolean(ID_HAS_PENDING_MATCH, pendingMatch != null)
+        if (pendingMatch != null) {
+            outState.putStringArrayList(ID_PENDING_MATCH_SEQUENCE, ArrayList(pendingMatch.errorSequence))
+            outState.putInt(ID_PENDING_MATCH_ERROR_INDEX, pendingMatch.errorIndex)
+            outState.putInt(ID_PENDING_MATCH_MAX_CORRECT, pendingMatch.maxCorrectLength)
+            outState.putLong(ID_PENDING_MATCH_CREATED_AT, pendingMatch.createdAt)
+        }
     }
 
     private fun bindUIViews() {
