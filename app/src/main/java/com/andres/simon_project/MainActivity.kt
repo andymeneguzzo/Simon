@@ -43,11 +43,21 @@ class MainActivity : AppCompatActivity() {
     /* Database */
     private lateinit var dbHelper: MatchDBHelper
 
-    /* Declare a companion object to identify the current sequence,
-    useful for InstanceState preservation since it can be called at class level
-    instead of instance level */
+    /* Declare a companion object to identify the useful information for InstanceState preservation */
     companion object {
+        /* current match data */
         private const val ID_CURRENT_SEQUENCE = "id_current_sequence"
+        private const val ID_COMPUTER_SEQUENCE = "id_computer_sequence"
+        private const val ID_GAME_STATE = "id_game_state"
+        private const val ID_COMPUTER_PRESENTATION_INDEX = "id_computer_presentation_index"
+        private const val ID_MAX_CORRECT_LENGTH = "id_max_correct_length"
+
+        /* match yet to be saved data */
+        private const val ID_HAS_PENDING_MATCH = "id_has_pending_match"
+        private const val ID_PENDING_MATCH_SEQUENCE = "id_pending_match_sequence"
+        private const val ID_PENDING_MATCH_ERROR_INDEX = "id_pending_match_error_index"
+        private const val ID_PENDING_MATCH_MAX_CORRECT = "id_pending_match_max_correct"
+        private const val ID_PENDING_MATCH_CREATED_AT = "id_pending_match_created_at"
     }
 
     /* onCreate method being called at app launch */
