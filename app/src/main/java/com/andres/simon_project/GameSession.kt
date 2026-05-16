@@ -76,9 +76,7 @@ object GameSession {
     /* When starting a new game, everything is set to default or initial value */
     fun startNewGame() {
         clearGameState()
-
         generateRandomColor()
-
         gameState = GameState.COMPUTER_TURN // starts with computer showing the sequence
     }
     /* clears variables for a new game start */
@@ -132,7 +130,7 @@ object GameSession {
         currentSequence.add(color)
 
         if (expectedColor != color) {
-            finishGameAfterError(pressedIndex) // pass the index in which error occured
+            finishGameAfterError(pressedIndex) // pass the index in which error occurred
             return PlayerPressResult.WRONG
         }
 
@@ -141,7 +139,6 @@ object GameSession {
             maxCorrectLength = computerSequence.size
             currentSequence.clear()
             generateRandomColor() // now it's going to be computer turn
-
             gameState = GameState.COMPUTER_TURN
             computerPresentationIndex = 0
 
@@ -203,11 +200,11 @@ object GameSession {
     }
 
 
+    /* adds in matchHistory the list of matches, these will be gotten from the db */
     fun putMatchHistory(matches: List<Match>) {
         matchHistory.clear()
         matchHistory.addAll(matches)
     }
-
 
 
 
