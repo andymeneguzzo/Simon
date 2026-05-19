@@ -31,16 +31,18 @@ class MatchDBHelper(context: Context) : SQLiteOpenHelper(
             )
         """.trimIndent()
 
-        // execute the sql defined above
+        // execute the query defined above
         db?.execSQL(createTableQuery)
     }
 
     override fun onUpgrade(
-        p0: SQLiteDatabase?,
-        p1: Int,
-        p2: Int
+        db: SQLiteDatabase?,
+        oldVersion: Int,
+        newVersion: Int
     ) {
-        TODO("Not yet implemented")
+        // when updating, drop the table if it exists and recreate it
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE")
+        onCreate(db)
     }
 
     /* CRUD OPERATIONS required -> save match (insert), then get matches and get matches by ID */
