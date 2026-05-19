@@ -288,9 +288,35 @@ class MainActivity : AppCompatActivity() {
             handleEndGame()
         }
     }
-    private fun onColorClicked(colorName: String) {
-        GameSession.appendColor(colorName) // add color to the sequence
-        printCurrentSequence()
+    private fun onColorClicked(color: String) {
+        val result = GameSession.handlePlayerColorPressed(color)
+        if (result == GameSession.PlayerPressResult.IGNORED) return
+
+        // set color of button to active state
+        activeColorFeedback(color)
+
+        when (result) {
+            GameSession.PlayerPressResult.PARTIALLY_CORRECT -> {
+                // correct, so just print text
+                printGameText()
+            }
+
+            GameSession.PlayerPressResult.ROUND_COMPLETED -> {
+                // round is finished, so print game text, update button state and begin computer presentation
+                printGameText()
+                updateButtonState()
+                beginComputerPresentation()
+            }
+
+            GameSession.PlayerPressResult.WRONG -> {
+                // wrong color, then print error state and update button state
+                printErrorState()
+                updateButtonState()
+            }
+
+            // ignore, so don't do anything
+            GameSession.PlayerPressResult.IGNORED -> Unit
+        }
     }
 
     private fun beginComputerPresentation() {
