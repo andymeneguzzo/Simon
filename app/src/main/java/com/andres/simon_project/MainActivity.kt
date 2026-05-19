@@ -195,7 +195,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             else -> {
-                // todo -> handle the ending of the game
+                handleEndGame()
             }
         }
     }
@@ -228,7 +228,7 @@ class MainActivity : AppCompatActivity() {
     private fun handleEndGame() {
         if (GameSession.isComputerPresentationDiscardable()) {
             GameSession.clearGameState()
-            // todo -> send to match list activity
+            navigateToMatchListActivity()
             return
         }
         if (GameSession.gameState == GameSession.GameState.GAME_OVER) {
@@ -275,15 +275,17 @@ class MainActivity : AppCompatActivity() {
         /* Buttons */
         buttonStartGame.setOnClickListener {
             GameSession.startNewGame()
-            /* TODO: complete */
+            printGameText()
+            updateButtonState()
+            beginComputerPresentation()
         }
 
         buttonPauseGame.setOnClickListener {
-            /* TODO: handle pause game */
+            handlePauseResumeGame()
         }
 
         buttonEndOfGame.setOnClickListener {
-            /* TODO: handle end of game */
+            handleEndGame()
         }
     }
     private fun onColorClicked(colorName: String) {
