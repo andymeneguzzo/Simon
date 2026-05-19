@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
+/* TODO: will need to create an adapter or formatter for the match text so that its colored in red from error index to the end */
+
 /* This is useful and essential to handle item_game element which represents
 * how the game will be shown in the MatchListActivity, and the RecyclerView that will
 * contain the list of played games, so then the item_game can be inflated in the RecyclerView */
-class MatchAdapter(private val matchItems: List<GameSession.Match>) : RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
+class MatchAdapter(private val matchItems: List<GameSession.Match>, onMatchClicked: (GameSession.Match) -> Unit) : RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
 
     /* when ViewHolder created, inflate the item_game in the RecyclerView */
     override fun onCreateViewHolder(
@@ -28,7 +30,7 @@ class MatchAdapter(private val matchItems: List<GameSession.Match>) : RecyclerVi
     ) {
         val matchItem = matchItems[position]
 
-        holder.textViewPressCount.text = matchItem.pressCount.toString()
+        holder.textViewPressCount.text = matchItem.maxCorrectLength.toString()
 
         /* using an inline if-else, more readable and straightforward */
         holder.textViewSequence.text = if (matchItem.sequence.isEmpty()) {
