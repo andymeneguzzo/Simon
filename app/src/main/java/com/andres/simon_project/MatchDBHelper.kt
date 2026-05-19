@@ -2,6 +2,7 @@ package com.andres.simon_project
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -83,11 +84,28 @@ class MatchDBHelper(context: Context) : SQLiteOpenHelper(
         )
         cursor.use {
             while (it.moveToNext()) {
-                /* todo: handle reading a match object from the cursor */
+                // add the match object returned from the method, so the match entry read from the cursor
+                matches.add(readFromCursor(it))
             }
         }
 
         return matches
+    }
+    private fun readFromCursor(cursor: Cursor) : GameSession.Match {
+        // get all the data from the cursor
+        val id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID))
+        val maxCorrectLength = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_MAX_CORRECT_LENGTH))
+        val errorSequenceJoined = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ERROR_SEQUENCE))
+        val errorIndex = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ERROR_INDEX))
+        val createdAt = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_CREATED_AT))
+
+        return GameSession.Match(
+            id = id,
+            maxCorrectLength = maxCorrectLength,
+            errorSequence = separateSequence(errorSequenceJoined),
+            errorIndex = errorIndex,
+            createdAt = createdAt
+        )
     }
 
     // retrieve match by its ID
