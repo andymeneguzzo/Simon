@@ -1,5 +1,6 @@
 package com.andres.simon_project
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -47,7 +48,19 @@ class MatchDBHelper(context: Context) : SQLiteOpenHelper(
 
     /* CRUD OPERATIONS required -> save match (insert), then get matches and get matches by ID */
     // insert match object in db
-    fun insertMatch(match: GameSession.Match) : Long {}
+    fun insertMatch(match: GameSession.Match) : Long {
+        val valuesToInsert = ContentValues().apply {
+            put(COLUMN_MAX_CORRECT_LENGTH, match.maxCorrectLength)
+            put(COLUMN_ERROR_SEQUENCE, joinSequence(match.errorSequence)) // could not put it as a raw sequence, but as a joined sequence
+            put(COLUMN_ERROR_INDEX, match.errorIndex)
+            put(COLUMN_CREATED_AT, match.createdAt)
+        }
+
+        return writableDatabase.insert(TABLE, null, valuesToInsert)
+    }
+    private fun joinSequence(sequence: List<String>) : String {
+        return sequence.joinToString(",")
+    }
 
     // retrieve all matches
     fun getAllMatches() : List<GameSession.Match> {}
