@@ -203,6 +203,39 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    private fun handlePauseResumeGame() {
+        when (GameSession.gameState) {
+            GameSession.GameState.COMPUTER_TURN -> {
+                GameSession.gameState = GameSession.GameState.PAUSED
+                updateButtonState()
+            }
+
+            GameSession.GameState.PAUSED -> {
+                GameSession.gameState = GameSession.GameState.COMPUTER_TURN
+                updateButtonState()
+                beginComputerPresentation()
+            }
+            else -> Unit
+        }
+    }
+    private fun handleEndGame() {
+        if (GameSession.isComputerPresentationDiscardable()) {
+            GameSession.clearGameState()
+            // todo -> send to match list activity
+            return
+        }
+        if (GameSession.gameState == GameSession.GameState.GAME_OVER) {
+            return
+        }
+
+        GameSession.finishGameAfterInterrupt()
+        val match = GameSession.consumeMatchYetToBeSaved()
+        if (match != null) {
+            // todo -> save match in db
+        }
+        // todo -> send to match list activity
+    }
+
 
     private fun bindUIViews() {
         /* TextView for sequence */
