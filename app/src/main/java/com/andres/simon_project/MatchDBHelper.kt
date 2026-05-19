@@ -22,4 +22,22 @@ class MatchDBHelper(context: Context) : SQLiteOpenHelper(
     override fun onCreate(db: SQLiteDatabase?) {
 
     }
+
+    override fun onUpgrade(
+        p0: SQLiteDatabase?,
+        p1: Int,
+        p2: Int
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    /* CRUD OPERATIONS required -> save match (insert), then get matches and get matches by ID */
+    // insert match object in db
+    fun insertMatch(match: GameSession.Match) : Long {}
+
+    // retrieve all matches
+    fun getAllMatches() : List<GameSession.Match> {}
+
+    // retrieve match by its ID
+    fun getMatchByID(matchID: Long) : GameSession.Match? {}
 }
