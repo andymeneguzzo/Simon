@@ -334,16 +334,16 @@ class MainActivity : AppCompatActivity() {
                     return@launch // after wait, check if still computer turn, otherwise stop the coroutine
                 }
 
-                val colorName = GameSession.computerSequence[GameSession.computerPresentationIndex]
+                val color = GameSession.computerSequence[GameSession.computerPresentationIndex]
 
                 runOnUiThread {
                     textViewSequence.text = ""
-                    // TODO might give some color feedback
+                    activeColorFeedback(color)
                 }
                 delay(430)
 
                 runOnUiThread {
-                    // todo: then deactivate the feedback
+                    inactiveColorFeedback(color)
                 }
 
                 GameSession.computerPresentationIndex++
