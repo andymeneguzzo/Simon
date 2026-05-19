@@ -87,6 +87,9 @@ class MainActivity : AppCompatActivity() {
         /* Ensure instance state is preserved when orientation changes */
         handleInstanceState(savedInstanceState)
 
+        /* set handler for system back */
+        handleSystemBack()
+
         /* Set interaction listeners for clickable colored TextViews and Buttons  */
         setInteractionListeners()
 
@@ -95,7 +98,6 @@ class MainActivity : AppCompatActivity() {
         updateButtonState()
 
         if (GameSession.gameState == GameSession.GameState.COMPUTER_TURN) {
-            /* TODO : start the computer presentation */
             beginComputerPresentation()
         }
     }
