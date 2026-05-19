@@ -1,6 +1,7 @@
 package com.andres.simon_project
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -170,6 +171,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+
     private fun bindUIViews() {
         /* TextView for sequence */
         textViewSequence = findViewById(R.id.textViewSequence)
@@ -256,6 +258,53 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    // assign to the letter the corresponding color button
+    private fun bindColorView(color: String) : TextView? {
+        return when (color) {
+            "R" -> buttonRed
+            "G" -> buttonGreen
+            "B" -> buttonBlue
+            "M" -> buttonMagenta
+            "Y" -> buttonYellow
+            "C" -> buttonCyan
+            else -> null
+        }
+    }
+
+    // assign a color for the active state of the button
+    private fun bindActiveColor(color: String) : Int {
+        return when (color) {
+            "R" -> Color.parseColor("#ff947f")
+            "G" -> Color.parseColor("#8dff87")
+            "B" -> Color.parseColor("#7f9cff")
+            "M" -> Color.parseColor("#ff8cff")
+            "Y" -> Color.parseColor("#fff28a")
+            "C" -> Color.parseColor("#8ce4ff")
+            else -> Color.WHITE
+        }
+    }
+
+    // assign a color (which is the default color) to the normal state of the button
+    private fun bindNormalColor(color: String) : Int {
+        return when (color) {
+            "R" -> Color.parseColor("#e85a41")
+            "G" -> Color.parseColor("#47d93f")
+            "B" -> Color.parseColor("#3b5fd4")
+            "M" -> Color.parseColor("#d43bd4")
+            "Y" -> Color.parseColor("#f2d933")
+            "C" -> Color.parseColor("#3ec1ed")
+            else -> Color.LTGRAY
+        }
+    }
+
+    /* methods to change the color of the button based on active state (pressed or normal) */
+    private fun activeColorFeedback(color: String) {
+        bindColorView(color)?.setBackgroundColor(bindActiveColor(color))
+        audioPlayer.playAudioForColor(color)
+    }
+    private fun inactiveColorFeedback(color: String) {
+        bindColorView(color)?.setBackgroundColor(bindNormalColor(color))
     }
 
     /*
