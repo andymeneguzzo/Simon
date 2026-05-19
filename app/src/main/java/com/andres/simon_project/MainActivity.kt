@@ -173,6 +173,13 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    private fun navigateToMatchListActivity() {
+        val intent = Intent(this, MatchListActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
+        finish()
+    }
+
     private fun handleSystemBackPressed() {
         when (GameSession.gameState) {
             GameSession.GameState.GAME_OVER -> {
