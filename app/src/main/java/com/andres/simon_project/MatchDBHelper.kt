@@ -20,7 +20,19 @@ class MatchDBHelper(context: Context) : SQLiteOpenHelper(
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
+        // create the database table: id, max_correct_length, error_sequence, error_index, created_at
+        val createTableQuery = """
+            CREATE TABLE $TABLE (
+                $COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMN_MAX_CORRECT_LENGTH INTEGER NOT NULL,
+                $COLUMN_ERROR_SEQUENCE TEXT NOT NULL,
+                $COLUMN_ERROR_INDEX INTEGER NOT NULL,
+                $COLUMN_CREATED_AT INTEGER NOT NULL
+            )
+        """.trimIndent()
 
+        // execute the sql defined above
+        db?.execSQL(createTableQuery)
     }
 
     override fun onUpgrade(
