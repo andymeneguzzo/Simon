@@ -61,9 +61,34 @@ class MatchDBHelper(context: Context) : SQLiteOpenHelper(
     private fun joinSequence(sequence: List<String>) : String {
         return sequence.joinToString(",")
     }
+    private fun separateSequence(joinedSequence: String) : List<String> {
+        if (joinedSequence.isBlank()) return emptyList()
+
+        return joinedSequence.split(",")
+    }
 
     // retrieve all matches
-    fun getAllMatches() : List<GameSession.Match> {}
+    fun getAllMatches() : List<GameSession.Match> {
+        val matches = mutableListOf<GameSession.Match>() // list of read matches to return
+
+        // query from a readableDB, use a cursor to basically go through every entry of the database, in this case in descending order
+        val cursor = readableDatabase.query(
+            TABLE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "$COLUMN_CREATED_AT DESC"
+        )
+        cursor.use {
+            while (it.moveToNext()) {
+                /* todo: handle reading a match object from the cursor */
+            }
+        }
+
+        return matches
+    }
 
     // retrieve match by its ID
     fun getMatchByID(matchID: Long) : GameSession.Match? {}
