@@ -5,6 +5,8 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -168,6 +170,36 @@ class MainActivity : AppCompatActivity() {
             computerPresentationIndex = handledComputerPresentationIndex,
             maxCorrectLength = handledMaxCorrectLength,
             matchYetToBeSaved = handledPendingMatch
+        )
+    }
+
+    private fun handleSystemBackPressed() {
+        when (GameSession.gameState) {
+            GameSession.GameState.GAME_OVER -> {
+                val match = GameSession.consumeMatchYetToBeSaved() // match is the finished match that has to be saved in db
+                if (match != null) {
+                    // todo -> save the match in the db
+                }
+                // todo -> send to match list activity
+            }
+
+            GameSession.GameState.IDLE -> {
+                // todo -> send to match list activity
+            }
+
+            else -> {
+                // todo -> handle the ending of the game
+            }
+        }
+    }
+    private fun handleSystemBack() {
+        onBackPressedDispatcher.addCallback (
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    handleSystemBackPressed()
+                }
+            }
         )
     }
 
