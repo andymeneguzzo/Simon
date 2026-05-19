@@ -109,5 +109,24 @@ class MatchDBHelper(context: Context) : SQLiteOpenHelper(
     }
 
     // retrieve match by its ID
-    fun getMatchByID(matchID: Long) : GameSession.Match? {}
+    fun getMatchByID(matchID: Long) : GameSession.Match? {
+        val cursor = readableDatabase.query(
+            TABLE,
+            null,
+            "$COLUMN_ID = ?",
+            arrayOf(matchID.toString()),
+            null,
+            null,
+            null
+        )
+        cursor.use {
+            if (it.moveToFirst()) {
+                // match with ID found, so return it
+                return readFromCursor(it)
+            }
+        }
+
+        // found nothing, return null
+        return null
+    }
 }
