@@ -187,11 +187,11 @@ class MainActivity : AppCompatActivity() {
                 if (match != null) {
                     // todo -> save the match in the db
                 }
-                // todo -> send to match list activity
+                navigateToMatchListActivity()
             }
 
             GameSession.GameState.IDLE -> {
-                // todo -> send to match list activity
+                navigateToMatchListActivity()
             }
 
             else -> {
@@ -240,7 +240,7 @@ class MainActivity : AppCompatActivity() {
         if (match != null) {
             // todo -> save match in db
         }
-        // todo -> send to match list activity
+        navigateToMatchListActivity()
     }
 
 
