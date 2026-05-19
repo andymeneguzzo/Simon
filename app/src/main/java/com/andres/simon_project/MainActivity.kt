@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity() {
             GameSession.GameState.GAME_OVER -> {
                 val match = GameSession.consumeMatchYetToBeSaved() // match is the finished match that has to be saved in db
                 if (match != null) {
-                    // todo -> save the match in the db
+                    dbHelper.insertMatch(match) // save the match in DB
                 }
                 navigateToMatchListActivity()
             }
@@ -240,7 +240,7 @@ class MainActivity : AppCompatActivity() {
         GameSession.finishGameAfterInterrupt()
         val match = GameSession.consumeMatchYetToBeSaved()
         if (match != null) {
-            // todo -> save match in db
+            dbHelper.insertMatch(match) // save match in DB
         }
         navigateToMatchListActivity()
     }
