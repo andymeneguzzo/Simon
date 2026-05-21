@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 /* This is useful and essential to handle item_game element which represents
 * how the game will be shown in the MatchListActivity, and the RecyclerView that will
 * contain the list of played games, so then the item_game can be inflated in the RecyclerView */
-class MatchAdapter(private val matchItems: List<GameSession.Match>, onMatchClicked: (GameSession.Match) -> Unit) : RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
+class MatchAdapter(private val matchItems: List<GameSession.Match>, private val onMatchClicked: (GameSession.Match) -> Unit) : RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
 
     /* when ViewHolder created, inflate the item_game in the RecyclerView */
     override fun onCreateViewHolder(
@@ -34,7 +34,7 @@ class MatchAdapter(private val matchItems: List<GameSession.Match>, onMatchClick
         holder.textViewSequence.text = MatchTextFormatter.buildErrorSequenceFormattedText(matchItem)
 
         holder.itemView.setOnClickListener {
-            /* todo: method to handle when match is clicked */
+            onMatchClicked(matchItem)
         }
     }
 
