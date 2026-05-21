@@ -106,6 +106,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         printGameText()
+        updateButtonState()
     }
 
     override fun onDestroy() {
@@ -296,6 +297,14 @@ class MainActivity : AppCompatActivity() {
 
         // set color of button to active state
         activeColorFeedback(color)
+
+        // fix - missing the return back to normal state
+        gameScope.launch {
+            delay(180)
+            runOnUiThread {
+                inactiveColorFeedback(color)
+            }
+        }
 
         when (result) {
             GameSession.PlayerPressResult.PARTIALLY_CORRECT -> {
