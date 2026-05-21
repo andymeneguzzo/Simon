@@ -54,12 +54,14 @@ class MatchListActivity : AppCompatActivity() {
         setupInteractionListeners()
     }
     private fun loadMatchesFromDB() {
-
+        val matches = dbHelper.getAllMatches()
+        GameSession.putMatchHistory(matches)
+        matchAdapter.notifyDataSetChanged() // called to tell the adapter the data has changed
     }
 
     override fun onResume() {
         super.onResume()
-        // todo: need to load the matches from db
+        loadMatchesFromDB()
     }
 
 
@@ -83,12 +85,10 @@ class MatchListActivity : AppCompatActivity() {
     }
 
     private fun setupInteractionListeners() {
-        buttonBack.setOnClickListener {
-            /* ensure the sequence is cleared so user can play a new one */
-            GameSession.clearCurrentSequence()
-
-            // activity is done and should be closed
-            finish()
+        buttonNewGame.setOnClickListener {
+            GameSession.clearGameState() // to ensure that whatever game was running or whatever data remained dangling, the game state is cleared
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 }
