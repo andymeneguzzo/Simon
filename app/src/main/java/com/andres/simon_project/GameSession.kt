@@ -27,13 +27,6 @@ object GameSession {
 
     /* Match is a completed game, represented as a Data class, a class mainly to contain data.
     * Match in fact contains only the number of colored rectangles pressed */
-    /**
-    data class Match(val sequence: List<String>) {
-        val pressCount : Int
-            /* get method returns the size of the sequence */
-            get() = sequence.size
-    }
-    */
     data class Match(
         val id: Long = 0L, // as a good practice and will be useful for SQLite
         val maxCorrectLength: Int, // as required, the max correct sequence length
