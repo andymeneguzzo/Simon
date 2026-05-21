@@ -199,34 +199,9 @@ object GameSession {
                 (gameState == GameState.COMPUTER_TURN || gameState == GameState.PAUSED) // game was paused or it was computer's turn
     }
 
-
     /* adds in matchHistory the list of matches, these will be gotten from the db */
     fun putMatchHistory(matches: List<Match>) {
         matchHistory.clear()
         matchHistory.addAll(matches)
-    }
-
-
-
-    /* Clear the sequence of colors */
-    fun clearCurrentSequence() {
-        /* currentSequence is a MutableList, so it's sufficient to call clear() method */
-        currentSequence.clear()
-    }
-
-    /* Add a new color to the sequence */
-    fun appendColor(colorName: String) {
-        /* currentSequence as a MutableList can call add(...) method to append a new color to the list */
-        currentSequence.add(colorName)
-    }
-
-    /* Terminate the current game */
-    fun endCurrentGame() {
-        /* save the sequence before termination, add to history then clear */
-        val finalSequence = currentSequence.toList()
-
-        /* when game is ended, the sequence is added to matchHistory */
-        // matchHistory.add(0, Match(finalSequence)) // add to top for "most recent" ordering
-        currentSequence.clear()
     }
 }
