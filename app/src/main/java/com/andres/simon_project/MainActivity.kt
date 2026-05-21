@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
 
         /* put the current sequence */
         outState.putStringArrayList(ID_CURRENT_SEQUENCE, ArrayList(GameSession.currentSequence))
-        outState.putStringArrayList(ID_COMPUTER_SEQUENCE, ArrayList(GameSession.currentSequence))
+        outState.putStringArrayList(ID_COMPUTER_SEQUENCE, ArrayList(GameSession.computerSequence))
         outState.putString(ID_GAME_STATE, GameSession.gameState.name)
         outState.putInt(ID_COMPUTER_PRESENTATION_INDEX, GameSession.computerPresentationIndex)
         outState.putInt(ID_MAX_CORRECT_LENGTH, GameSession.maxCorrectLength)
