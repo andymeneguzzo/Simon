@@ -73,9 +73,9 @@ class MatchListActivity : AppCompatActivity() {
 
     private fun setupRecyclerViewMatches() {
         /* create a MatchAdapter for match history */
-        matchAdapter = MatchAdapter(GameSession.matchHistory) {
+        matchAdapter = MatchAdapter(GameSession.matchHistory) { match ->
             val intent = Intent(this, MatchDetailActivity::class.java)
-            // todo: will need to send the ID of the match I want to see the details of
+            intent.putExtra(MatchDetailActivity.MATCH_ID, match.id)
             startActivity(intent)
         }
 

@@ -37,13 +37,31 @@ class MatchDetailActivity : AppCompatActivity() {
         }
 
         dbHelper = MatchDBHelper(this)
-        // todo -> bind UI views, render the detail
+        bindUIViews()
+        printMatchDetail()
     }
     private fun bindUIViews() {
         textViewPressCount = findViewById(R.id.textViewPressCount)
         textViewSequence = findViewById(R.id.textViewSequence)
     }
     private fun printMatchDetail() {
+        val matchID = intent.getLongExtra(MATCH_ID, -1L)
 
+        if (matchID == -1L) {
+            // match ID is invalid
+            finish()
+            return
+        }
+
+        val match = dbHelper.getMatchByID(matchID)
+        if (match == null) {
+            // match does not exist in DB
+            finish()
+            return
+        }
+
+        // match exists and was found
+        textViewPressCount.text = match.maxCorrectLength.toString()
+        textViewSequence.text = MatchTextFormatter.buildErrorSequenceFormattedText(match)
     }
 }
