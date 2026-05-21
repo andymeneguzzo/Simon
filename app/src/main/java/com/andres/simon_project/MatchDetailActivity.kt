@@ -40,7 +40,8 @@ class MatchDetailActivity : AppCompatActivity() {
         // todo -> bind UI views, render the detail
     }
     private fun bindUIViews() {
-
+        textViewPressCount = findViewById(R.id.textViewPressCount)
+        textViewSequence = findViewById(R.id.textViewSequence)
     }
     private fun printMatchDetail() {
 
