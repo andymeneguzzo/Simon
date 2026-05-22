@@ -80,7 +80,7 @@ class MatchDBHelper(context: Context) : SQLiteOpenHelper(
             null,
             null,
             null,
-            "$COLUMN_CREATED_AT DESC"
+            "$COLUMN_CREATED_AT DESC, $COLUMN_ID, DESC" // more stable ordering in case of two matches (edge case) being saved at the same time
         )
         cursor.use {
             while (it.moveToNext()) {
